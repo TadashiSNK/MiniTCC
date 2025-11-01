@@ -1,7 +1,12 @@
 @import './index.css';
 
 .mainPage{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   height: 100dvh;
   width: 100%;
-  background-color: pink;
+  background-color: black;
+  
 }

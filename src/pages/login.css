@@ -1,0 +1,18 @@
+@import '../index.css';
+
+
+
+
+
+
+
+
+.loginBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 600px;
+    height: 600px;
+    background-color: salmon;
+}

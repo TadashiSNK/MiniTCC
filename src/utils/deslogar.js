@@ -1,0 +1,6 @@
+function deslogar(){
+    localStorage.removeItem("token")
+    window.location.href = "/"
+}
+
+export default deslogar

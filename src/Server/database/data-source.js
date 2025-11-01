@@ -1,5 +1,6 @@
 import "reflect-metadata"
 import { DataSource } from "typeorm"
+import users from "../entities/users.js"
 
 const AppDataSource = new DataSource({
     type: "mysql",
@@ -9,7 +10,7 @@ const AppDataSource = new DataSource({
     password: "",
     database: "miniTCC",
     // synchronize: true,
-    entities: ["./src/Server/entities/*.js"],       
+    entities: [users],       
     migrations: ["./src/Server/database/migrations/*cjs"],
 })
 

@@ -10,3 +10,8 @@
   align-items: center;
   justify-content: center;
 }
+
+.fullPage{
+  height: 100dvh;
+  width: 100%;
+}

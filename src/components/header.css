@@ -1,0 +1,13 @@
+@import '../index.css';
+
+
+
+.header{
+    background-color: white;
+    height: 10%;
+    width: 100%;
+    border-bottom: 2px solid rgba(82, 82, 82, 0.411);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
