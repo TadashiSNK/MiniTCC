@@ -21,7 +21,7 @@ function Cadastro(){
                 return
             }
 
-            const response = await fetch('http://localhost:3333/user/cadastro', {
+            const response = await fetch('/user/cadastro', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
