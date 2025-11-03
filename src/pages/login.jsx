@@ -18,7 +18,7 @@ function Login(props){
 
     const login = async () => {
 
-
+//// request do login
         const response = await fetch('/user/login', {
             method: 'POST',
             headers: {
@@ -31,13 +31,16 @@ function Login(props){
         })
         const token = await response.text()
 
+        
         if (!response.ok){
             alert("login falhou")
             return
         }
-
+        
+        ///se o login der certo, seta o token no local storage
         localStorage.setItem("token", token);
 
+        //redireciona pra home page
         navigate("/Home")
 }
 

@@ -29,7 +29,8 @@ function Cadastro(){
                 body: JSON.stringify({
                     usuario: usuario,
                     senha: senha,
-                    email: email
+                    email: email,
+                    foto_path: null
                 })
             })
             if (!response.ok){

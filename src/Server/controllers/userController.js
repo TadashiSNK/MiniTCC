@@ -2,14 +2,41 @@ import express from 'express'
 import {AppDataSource} from '../database/data-source.js'
 import usersEntity from '../entities/users.js'
 import { generateToken } from '../../utils/jwt.js'
+import multer from 'multer'
+import { jwtDecode } from 'jwt-decode'
 
+
+
+
+
+
+
+
+const storage = multer.diskStorage({
+    destination: function (req,file,cb){
+        cb(null, 'K:\\Secundária\\Repeat_Client\\Escola\\miniTCC\\public\\img')
+    },
+    filename: function (req,file,cb){
+        cb(null, "fodase.jpg")
+    }
+})
 
 const route = express.Router()
+const pastaFotos = multer({storage})
+
+
+
+
+
 
 const userRepository = AppDataSource.getRepository(usersEntity)
 
 
-
+///rota de upload de imagem
+route.post("/upload", pastaFotos.single('foto'), async (req,res) => {
+    console.log(req.file)
+    res.json(req.file)
+})
 
 ///ROTA DE CADASTRO
 route.post("/cadastro", async (request, response) => {
@@ -41,9 +68,10 @@ route.post("/login", async (req, res) => {
             const token = generateToken({
                 "nome_usuario": dadosDoBanco.nome_usuario,
                 "id_usuario": dadosDoBanco.id_usuario,
-                "email": dadosDoBanco.email_usuario
+                "email": dadosDoBanco.email_usuario,
+                "foto_path": `${dadosDoBanco.id_usuario}.jpg`
                                         })
-            console.log("aceter") 
+            console.log("acertou") 
             console.log(token)
 
             res.json({"token":token})

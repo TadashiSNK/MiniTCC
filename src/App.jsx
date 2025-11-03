@@ -8,6 +8,7 @@ import Cadastro from './pages/cadastro.jsx'
 import Home from './pages/home.jsx'
 
 import { createBrowserRouter, RouterProvider, Link } from 'react-router-dom'
+import MeuPerfil from './pages/meuPerfil.jsx'
 
 const router = createBrowserRouter([
   {
@@ -21,7 +22,11 @@ const router = createBrowserRouter([
   {
     path: '/home',
     element: <Home/>
-  }
+  },
+  {
+    path: '/MeuPerfil',
+    element: <MeuPerfil/>
+  },
 ])
 
 

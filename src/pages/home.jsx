@@ -1,8 +1,10 @@
 import deslogar from "../utils/deslogar"
 import './home.css'
 import { jwtDecode } from "jwt-decode"
+import meuPerfil from './meuPerfil'
 
 
+import { createBrowserRouter, RouterProvider, Link } from 'react-router-dom'
 
 
 
@@ -18,7 +20,7 @@ function Home(props){
     return(
         <div className="flex-center fullPage">
             <p>SEJA BEM VINDO {nome_usuario}</p>
-            <button>Meu Perfil</button>
+            <Link to="/meuPerfil">Meu Perfil</Link>
             <button>Amigos</button>
             <button>Adicionar Amigos</button>
             <button onClick={deslogar}> Sair </button>

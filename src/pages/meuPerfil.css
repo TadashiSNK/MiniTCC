@@ -1,0 +1,12 @@
+@import '../index.css';
+
+
+.profile-pic{
+    height: 100px;
+    width: 100px;
+    border-radius: 50px;
+}
+
+.fullPage{
+    flex-direction: column;
+}
