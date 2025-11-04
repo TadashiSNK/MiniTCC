@@ -14,10 +14,14 @@ function FileUploader(){
 
         await axios.post('user/upload', uparFotoForm, {
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'multipart/form-data',
+                'Authorization': `${localStorage.getItem("token")}`,
             }
         })
+    window.location.reload();
     }
+    
+
 
 
 

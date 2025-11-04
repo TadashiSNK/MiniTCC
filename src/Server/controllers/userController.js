@@ -16,10 +16,23 @@ const storage = multer.diskStorage({
     destination: function (req,file,cb){
         cb(null, 'K:\\Secundária\\Repeat_Client\\Escola\\miniTCC\\public\\img')
     },
-    filename: function (req,file,cb){
-        cb(null, "fodase.jpg")
+    filename: function (req, file, cb) {
+    try {
+        // extrai e decodifica o token
+        const authHeader = req.headers.authorization;
+        if (!authHeader) return cb(new Error("No authorization header"));
+        
+        const token = req.headers.authorization
+        const decoded = jwtDecode(token);
+        const userId = decoded.id_usuario;
+
+        // salva o arquivo
+        cb(null, `${userId}.jpg`);
+    } catch (err) {
+        cb(err);
     }
-})
+    },
+});
 
 const route = express.Router()
 const pastaFotos = multer({storage})
@@ -34,6 +47,15 @@ const userRepository = AppDataSource.getRepository(usersEntity)
 
 ///rota de upload de imagem
 route.post("/upload", pastaFotos.single('foto'), async (req,res) => {
+
+    const token = req.headers.authorization
+    const decoded = jwtDecode(token);
+    const userId = decoded.id_usuario;
+
+
+    await userRepository.update(
+    { id_usuario: userId }, { foto_path: `${userId}` });
+
     console.log(req.file)
     res.json(req.file)
 })
@@ -41,9 +63,9 @@ route.post("/upload", pastaFotos.single('foto'), async (req,res) => {
 ///ROTA DE CADASTRO
 route.post("/cadastro", async (request, response) => {
     
-    const {usuario, email,  senha} =  request.body
+    const {usuario, email, foto_path,  senha} =  request.body
 
-    const novoUsuario = userRepository.create({nome_usuario: usuario, email_usuario:email, senha_usuario: senha})
+    const novoUsuario = userRepository.create({nome_usuario: usuario, email_usuario:email, foto_path:foto_path, senha_usuario: senha})
     await userRepository.save(novoUsuario)
     response.status(200).send()
 
@@ -69,7 +91,7 @@ route.post("/login", async (req, res) => {
                 "nome_usuario": dadosDoBanco.nome_usuario,
                 "id_usuario": dadosDoBanco.id_usuario,
                 "email": dadosDoBanco.email_usuario,
-                "foto_path": `${dadosDoBanco.id_usuario}.jpg`
+                "foto_path": `${dadosDoBanco.foto_path}`
                                         })
             console.log("acertou") 
             console.log(token)

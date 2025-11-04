@@ -30,7 +30,7 @@ function Cadastro(){
                     usuario: usuario,
                     senha: senha,
                     email: email,
-                    foto_path: null
+                    foto_path: ""
                 })
             })
             if (!response.ok){
